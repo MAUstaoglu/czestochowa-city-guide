@@ -250,8 +250,68 @@
             recommendations without requiring cloud APIs.
         </div>
 
-        <!-- 2. System Architecture -->
-        <h2>2. System Architecture</h2>
+        <!-- Getting Started -->
+        <h2>2. Getting Started (Installation Guide)</h2>
+        <p>
+            Follow these steps to run the project from scratch on any machine with Python 3.10+.
+        </p>
+
+        <h3>2.1 Prerequisites</h3>
+        <ul>
+            <li><strong>Python 3.10+</strong> - Download from <a href="https://python.org">python.org</a></li>
+            <li><strong>Ollama</strong> - Local LLM runtime</li>
+            <li><strong>~7GB disk space</strong> - For models and dependencies</li>
+        </ul>
+
+        <h3>2.2 Install Ollama</h3>
+        <pre><code># macOS (using Homebrew)
+brew install ollama
+
+# Or download from https://ollama.ai for macOS/Windows/Linux
+
+# Start Ollama service
+ollama serve
+
+# Pull the Gemma model (in a new terminal)
+ollama pull gemma:2b    # Smaller, faster (1.7GB)
+# OR
+ollama pull gemma:7b    # Larger, better quality (5GB)</code></pre>
+
+        <h3>2.3 Clone and Install Dependencies</h3>
+        <pre><code># Clone the repository
+git clone https://github.com/MAUstaoglu/czestochowa-city-guide.git
+cd czestochowa-city-guide
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install Python packages
+pip install -r requirements.txt</code></pre>
+
+        <h3>2.4 Prepare Data and Index</h3>
+        <pre><code># Fetch POI data from OpenStreetMap
+python data/fetch_osm_data.py
+
+# Generate synthetic reviews
+python data/generate_reviews.py
+
+# Index data into ChromaDB (creates vector embeddings)
+python rag/vector_store.py</code></pre>
+
+        <h3>2.5 Run the Application</h3>
+        <pre><code># Make sure Ollama is running (ollama serve)
+python app.py
+
+# Open browser at http://localhost:5001</code></pre>
+
+        <div class="highlight">
+            <strong>Note:</strong> The first run may take a few minutes as it downloads the
+            embedding model (~90MB). Subsequent runs will be faster.
+        </div>
+
+        <!-- 3. System Architecture -->
+        <h2>3. System Architecture</h2>
         <p>
             The application follows the RAG (Retrieval-Augmented Generation) pattern, which enhances
             LLM responses by providing relevant context from a knowledge base:
@@ -270,7 +330,7 @@
             │ Enriched POI Data from OpenStreetMap │
             └─────────────────────────────────────────────────────────────┘</div>
 
-        <h3>2.1 Data Flow</h3>
+        <h3>3.1 Data Flow</h3>
         <ol>
             <li><strong>User Query:</strong> User asks a question in natural language</li>
             <li><strong>Embedding:</strong> Query is converted to a 384-dimensional vector using all-MiniLM-L6-v2</li>
@@ -280,8 +340,8 @@
             <li><strong>Response:</strong> Answer is displayed with source citations</li>
         </ol>
 
-        <!-- 3. Technology Stack -->
-        <h2>3. Technology Stack</h2>
+        <!-- 4. Technology Stack -->
+        <h2>4. Technology Stack</h2>
 
         <table>
             <tr>
@@ -333,10 +393,10 @@
 
         <div class="page-break"></div>
 
-        <!-- 4. Implementation Details -->
-        <h2>4. Implementation Details</h2>
+        <!-- 5. Implementation Details -->
+        <h2>5. Implementation Details</h2>
 
-        <h3>4.1 Data Pipeline</h3>
+        <h3>5.1 Data Pipeline</h3>
         <p>The data preparation involves three stages:</p>
 
         <table>
@@ -362,7 +422,7 @@
             </tr>
         </table>
 
-        <h3>4.2 Embedding Model</h3>
+        <h3>5.2 Embedding Model</h3>
         <p>
             I use <code>all-MiniLM-L6-v2</code> from Sentence-Transformers for creating embeddings.
             This model produces 384-dimensional vectors that capture semantic meaning, enabling
@@ -380,7 +440,7 @@ class EmbeddingModel:
         """Convert texts to 384-dimensional vectors."""
         return self.model.encode(texts, convert_to_numpy=True)</code></pre>
 
-        <h3>4.3 Vector Database</h3>
+        <h3>5.3 Vector Database</h3>
         <p>
             ChromaDB stores the embedded vectors and enables fast cosine similarity search. When a
             user asks a question, the query is embedded and compared against all 556 POI vectors
@@ -402,7 +462,7 @@ class VectorStore:
         )
         return results</code></pre>
 
-        <h3>4.4 Large Language Model</h3>
+        <h3>5.4 Large Language Model</h3>
         <p>
             The system uses Google's Gemma model running locally via Ollama. I implemented support
             for both <code>gemma:2b</code> (1.7GB, faster) and <code>gemma:7b</code> (5GB, more capable).
@@ -424,7 +484,7 @@ class LLM:
         )
         return response.json()["response"]</code></pre>
 
-        <h3>4.5 RAG Prompt Engineering</h3>
+        <h3>5.5 RAG Prompt Engineering</h3>
         <p>The LLM receives a carefully crafted prompt that includes:</p>
         <ul>
             <li>System role as a "friendly tourist guide for Częstochowa"</li>
@@ -449,8 +509,8 @@ Question: {question}
 Answer:"""
     return prompt</code></pre>
 
-        <!-- 5. Features -->
-        <h2>5. Features</h2>
+        <!-- 6. Features -->
+        <h2>6. Features</h2>
         <ul>
             <li><strong>Natural Language Queries:</strong> Ask questions in plain English or Polish</li>
             <li><strong>Category Filtering:</strong> Filter results by restaurant, hotel, museum, etc.</li>
@@ -460,8 +520,8 @@ Answer:"""
             <li><strong>Fully Offline:</strong> Works without internet after initial setup</li>
         </ul>
 
-        <!-- 6. Project Structure -->
-        <h2>6. Project Structure</h2>
+        <!-- 7. Project Structure -->
+        <h2>7. Project Structure</h2>
         <pre><code>project/
 ├── app.py                 # Flask web server & API endpoints
 ├── config.py              # Configuration settings
@@ -490,24 +550,24 @@ Answer:"""
 
         <div class="page-break"></div>
 
-        <!-- 7. Neural Network Concepts -->
-        <h2>7. Neural Network Concepts Applied</h2>
+        <!-- 8. Neural Network Concepts -->
+        <h2>8. Neural Network Concepts Applied</h2>
 
-        <h3>7.1 Transformer Architecture</h3>
+        <h3>8.1 Transformer Architecture</h3>
         <p>
             Both the embedding model (MiniLM) and the LLM (Gemma) are based on the Transformer
             architecture. MiniLM uses the encoder portion for creating semantic embeddings, while
             Gemma uses a decoder-only architecture for text generation.
         </p>
 
-        <h3>7.2 Sentence Embeddings</h3>
+        <h3>8.2 Sentence Embeddings</h3>
         <p>
             The embedding model maps variable-length text to fixed-size vectors (384 dimensions)
             in a semantic space where similar meanings are close together. This is achieved through
             training on sentence pairs using contrastive learning.
         </p>
 
-        <h3>7.3 Vector Similarity Search</h3>
+        <h3>8.3 Vector Similarity Search</h3>
         <p>
             ChromaDB uses cosine similarity to compare vectors:
         </p>
@@ -516,15 +576,15 @@ Answer:"""
             Higher similarity scores indicate more semantically related documents.
         </p>
 
-        <h3>7.4 Language Model Generation</h3>
+        <h3>8.4 Language Model Generation</h3>
         <p>
             Gemma generates responses autoregressively, predicting one token at a time based on
             the context (prompt + retrieved documents). Temperature parameter controls randomness
             in token selection.
         </p>
 
-        <!-- 8. Results & Evaluation -->
-        <h2>8. Results</h2>
+        <!-- 9. Results & Evaluation -->
+        <h2>9. Results</h2>
         <p>
             The system successfully indexes 556 POIs across multiple categories and responds to
             complex multi-part queries. Example tested queries include:
@@ -540,15 +600,15 @@ Answer:"""
             ~5-10 seconds with Gemma:2b. Trade-off between quality and speed.
         </div>
 
-        <h3>8.1 User Interface</h3>
+        <h3>9.1 User Interface</h3>
         <figure class="screenshot">
             <img src="static/chat_screenshot.png" alt="Częstochowa City Guide Chat Interface">
             <figcaption>Figure 1: Chat interface showing the model selector, status indicator, and conversation area
             </figcaption>
         </figure>
 
-        <!-- 9. Challenges -->
-        <h2>9. Challenges & Solutions</h2>
+        <!-- 10. Challenges -->
+        <h2>10. Challenges &amp; Solutions</h2>
         <table>
             <tr>
                 <th>Challenge</th>
@@ -572,8 +632,8 @@ Answer:"""
             </tr>
         </table>
 
-        <!-- 10. Conclusion -->
-        <h2>10. Conclusion</h2>
+        <!-- 11. Conclusion -->
+        <h2>11. Conclusion</h2>
         <p>
             This project demonstrates a practical application of modern deep learning techniques
             including transformer-based embeddings, vector databases, and large language models.
