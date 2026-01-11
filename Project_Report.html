@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks Course Project Report</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: #ffffff;
+            font-size: 11pt;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 50px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #c41e3a;
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 14pt;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .header .meta {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .header .meta strong {
+            color: #333;
+        }
+
+        /* Sections */
+        h2 {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #c41e3a;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #333;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Code */
+        code {
+            font-family: 'SF Mono', Monaco, monospace;
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9pt;
+        }
+
+        pre {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 9pt;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #c41e3a;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Architecture Diagram */
+        .diagram {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 9pt;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Highlights */
+        .highlight {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border-left: 4px solid #c41e3a;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight strong {
+            color: #c41e3a;
+        }
+
+        /* Screenshots */
+        .screenshot {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0e0e0;
+        }
+
+        .screenshot figcaption {
+            margin-top: 10px;
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 9pt;
+            color: #888;
+        }
+
+        /* Page break for printing */
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏰 Częstochowa City Guide</h1>
+            <div class="subtitle">AI-Powered Question-Answering System using RAG</div>
+            <div class="meta">
+                <strong>Course:</strong> Neural Networks and Machine Learning<br>
+                <strong>Student:</strong> Mehmet Ali Ustaoglu
+            </div>
+        </div>
+
+        <!-- 1. Introduction -->
+        <h2>1. Introduction</h2>
+        <p>
+            This project implements an intelligent city guide chatbot for Częstochowa, Poland using
+            <strong>Retrieval-Augmented Generation (RAG)</strong> architecture. The system can answer
+            natural language questions about restaurants, hotels, museums, religious sites, parks,
+            shopping venues, and nightlife in the city.
+        </p>
+        <p>
+            The primary goal was to demonstrate modern deep learning techniques by building a practical
+            application that combines vector embeddings, semantic search, and large language models
+            to provide accurate, context-aware responses.
+        </p>
+
+        <div class="highlight">
+            <strong>Key Achievement:</strong> The system indexes 556 Points of Interest (POIs) from
+            OpenStreetMap and uses a locally-running LLM (Gemma) to generate helpful travel
+            recommendations without requiring cloud APIs.
+        </div>
+
+        <!-- 2. System Architecture -->
+        <h2>2. System Architecture</h2>
+        <p>
+            The application follows the RAG (Retrieval-Augmented Generation) pattern, which enhances
+            LLM responses by providing relevant context from a knowledge base:
+        </p>
+
+        <div class="diagram">┌─────────────────────────────────────────────────────────────┐
+            │ Web Interface (Flask) │
+            ├─────────────────────────────────────────────────────────────┤
+            │ RAG Pipeline │
+            │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────┐ │
+            │ │ Query │→ │ ChromaDB │→ │ Gemma:7b (Ollama) │ │
+            │ │ Embedding │ │ Retrieval │ │ Generation │ │
+            │ └─────────────┘ └─────────────┘ └─────────────────────┘ │
+            ├─────────────────────────────────────────────────────────────┤
+            │ Vector Database (ChromaDB) │
+            │ Enriched POI Data from OpenStreetMap │
+            └─────────────────────────────────────────────────────────────┘</div>
+
+        <h3>2.1 Data Flow</h3>
+        <ol>
+            <li><strong>User Query:</strong> User asks a question in natural language</li>
+            <li><strong>Embedding:</strong> Query is converted to a 384-dimensional vector using all-MiniLM-L6-v2</li>
+            <li><strong>Retrieval:</strong> ChromaDB performs semantic similarity search to find relevant POIs</li>
+            <li><strong>Context Building:</strong> Top-K (default 3) documents are retrieved with metadata</li>
+            <li><strong>Generation:</strong> Gemma LLM generates a response using the retrieved context</li>
+            <li><strong>Response:</strong> Answer is displayed with source citations</li>
+        </ol>
+
+        <!-- 3. Technology Stack -->
+        <h2>3. Technology Stack</h2>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Technology</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>Python 3.10+</td>
+                <td>Backend, RAG pipeline, data processing</td>
+            </tr>
+            <tr>
+                <td>Web Framework</td>
+                <td>Flask</td>
+                <td>REST API and web server</td>
+            </tr>
+            <tr>
+                <td>LLM Runtime</td>
+                <td>Ollama</td>
+                <td>Local LLM inference engine</td>
+            </tr>
+            <tr>
+                <td>LLM Model</td>
+                <td>Gemma:7b</td>
+                <td>Google's open-source language model</td>
+            </tr>
+            <tr>
+                <td>Embeddings</td>
+                <td>all-MiniLM-L6-v2</td>
+                <td>Sentence embeddings (384 dimensions)</td>
+            </tr>
+            <tr>
+                <td>Vector Database</td>
+                <td>ChromaDB</td>
+                <td>Semantic similarity search</td>
+            </tr>
+            <tr>
+                <td>Data Source</td>
+                <td>OpenStreetMap API</td>
+                <td>Real-world POI data</td>
+            </tr>
+            <tr>
+                <td>Frontend</td>
+                <td>HTML/CSS/JavaScript</td>
+                <td>Chat interface</td>
+            </tr>
+        </table>
+
+        <div class="page-break"></div>
+
+        <!-- 4. Implementation Details -->
+        <h2>4. Implementation Details</h2>
+
+        <h3>4.1 Data Pipeline</h3>
+        <p>The data preparation involves three stages:</p>
+
+        <table>
+            <tr>
+                <th>Stage</th>
+                <th>Script</th>
+                <th>Output</th>
+            </tr>
+            <tr>
+                <td>1. Fetch</td>
+                <td><code>fetch_osm_data.py</code></td>
+                <td>Raw POIs from OpenStreetMap Overpass API</td>
+            </tr>
+            <tr>
+                <td>2. Enrich</td>
+                <td><code>generate_reviews.py</code></td>
+                <td>POIs with synthetic reviews and ratings</td>
+            </tr>
+            <tr>
+                <td>3. Index</td>
+                <td><code>vector_store.py</code></td>
+                <td>Vector embeddings stored in ChromaDB</td>
+            </tr>
+        </table>
+
+        <h3>4.2 Embedding Model</h3>
+        <p>
+            I use <code>all-MiniLM-L6-v2</code> from Sentence-Transformers for creating embeddings.
+            This model produces 384-dimensional vectors that capture semantic meaning, enabling
+            similarity search even when exact keywords don't match. For example, a query about
+            "romantic dinner" can match restaurants described as "cozy" or "intimate."
+        </p>
+
+        <h3>4.3 Vector Database</h3>
+        <p>
+            ChromaDB stores the embedded vectors and enables fast cosine similarity search. When a
+            user asks a question, the query is embedded and compared against all 556 POI vectors
+            to find the most semantically similar documents.
+        </p>
+
+        <h3>4.4 Large Language Model</h3>
+        <p>
+            The system uses Google's Gemma model running locally via Ollama. I implemented support
+            for both <code>gemma:2b</code> (1.7GB, faster) and <code>gemma:7b</code> (5GB, more capable).
+            The UI includes a model switcher to change between available models dynamically.
+        </p>
+
+        <h3>4.5 RAG Prompt Engineering</h3>
+        <p>The LLM receives a carefully crafted prompt that includes:</p>
+        <ul>
+            <li>System role as a "friendly tourist guide for Częstochowa"</li>
+            <li>Instructions to use only the provided context</li>
+            <li>Retrieved POI documents with names, addresses, ratings, and reviews</li>
+            <li>The user's original question</li>
+        </ul>
+
+        <!-- 5. Features -->
+        <h2>5. Features</h2>
+        <ul>
+            <li><strong>Natural Language Queries:</strong> Ask questions in plain English or Polish</li>
+            <li><strong>Category Filtering:</strong> Filter results by restaurant, hotel, museum, etc.</li>
+            <li><strong>Source Citations:</strong> Each answer shows which POIs were used</li>
+            <li><strong>Response Metadata:</strong> Displays latency and document count</li>
+            <li><strong>Model Switching:</strong> Change LLM models from the UI</li>
+            <li><strong>Fully Offline:</strong> Works without internet after initial setup</li>
+        </ul>
+
+        <!-- 6. Project Structure -->
+        <h2>6. Project Structure</h2>
+        <pre><code>project/
+├── app.py                 # Flask web server & API endpoints
+├── config.py              # Configuration settings
+├── requirements.txt       # Python dependencies
+│
+├── data/
+│   ├── fetch_osm_data.py  # OpenStreetMap data fetcher
+│   ├── generate_reviews.py # Review generator
+│   └── czestochowa_pois.json # Enriched POI data
+│
+├── rag/
+│   ├── embeddings.py      # Sentence embeddings
+│   ├── vector_store.py    # ChromaDB integration
+│   ├── llm.py             # Ollama/Gemma integration
+│   └── pipeline.py        # Complete RAG pipeline
+│
+├── evaluation/
+│   ├── metrics.py         # Evaluation metrics
+│   └── run_evaluation.py  # Benchmark runner
+│
+├── templates/
+│   └── index.html         # Chat interface
+│
+└── static/
+    └── style.css          # Styling</code></pre>
+
+        <div class="page-break"></div>
+
+        <!-- 7. Neural Network Concepts -->
+        <h2>7. Neural Network Concepts Applied</h2>
+
+        <h3>7.1 Transformer Architecture</h3>
+        <p>
+            Both the embedding model (MiniLM) and the LLM (Gemma) are based on the Transformer
+            architecture. MiniLM uses the encoder portion for creating semantic embeddings, while
+            Gemma uses a decoder-only architecture for text generation.
+        </p>
+
+        <h3>7.2 Sentence Embeddings</h3>
+        <p>
+            The embedding model maps variable-length text to fixed-size vectors (384 dimensions)
+            in a semantic space where similar meanings are close together. This is achieved through
+            training on sentence pairs using contrastive learning.
+        </p>
+
+        <h3>7.3 Vector Similarity Search</h3>
+        <p>
+            ChromaDB uses cosine similarity to compare vectors:
+        </p>
+        <pre><code>similarity = (A · B) / (||A|| × ||B||)</code></pre>
+        <p>
+            Higher similarity scores indicate more semantically related documents.
+        </p>
+
+        <h3>7.4 Language Model Generation</h3>
+        <p>
+            Gemma generates responses autoregressively, predicting one token at a time based on
+            the context (prompt + retrieved documents). Temperature parameter controls randomness
+            in token selection.
+        </p>
+
+        <!-- 8. Results & Evaluation -->
+        <h2>8. Results</h2>
+        <p>
+            The system successfully indexes 556 POIs across multiple categories and responds to
+            complex multi-part queries. Example tested queries include:
+        </p>
+        <ul>
+            <li>"What restaurants are in Częstochowa?" → Returns specific restaurants with ratings</li>
+            <li>"Recommend a hotel near Jasna Góra monastery" → Finds hotels with proximity context</li>
+            <li>"Where can I go shopping?" → Returns malls, shops, and boutiques</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>Performance:</strong> Average response time ~15-20 seconds with Gemma:7b,
+            ~5-10 seconds with Gemma:2b. Trade-off between quality and speed.
+        </div>
+
+        <h3>8.1 User Interface</h3>
+        <figure class="screenshot">
+            <img src="static/chat_screenshot.png" alt="Częstochowa City Guide Chat Interface">
+            <figcaption>Figure 1: Chat interface showing the model selector, status indicator, and conversation area
+            </figcaption>
+        </figure>
+
+        <!-- 9. Challenges -->
+        <h2>9. Challenges & Solutions</h2>
+        <table>
+            <tr>
+                <th>Challenge</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>Limited POI data from OSM</td>
+                <td>Generated synthetic reviews to enrich content</td>
+            </tr>
+            <tr>
+                <td>LLM hallucination</td>
+                <td>Strict prompt engineering to use only provided context</td>
+            </tr>
+            <tr>
+                <td>Slow inference time</td>
+                <td>Offer choice between faster (2b) and better (7b) models</td>
+            </tr>
+            <tr>
+                <td>Special characters (Polish)</td>
+                <td>UTF-8 encoding throughout the pipeline</td>
+            </tr>
+        </table>
+
+        <!-- 10. Conclusion -->
+        <h2>10. Conclusion</h2>
+        <p>
+            This project demonstrates a practical application of modern deep learning techniques
+            including transformer-based embeddings, vector databases, and large language models.
+            The RAG architecture successfully grounds LLM responses in real data, reducing
+            hallucination while providing helpful, accurate travel recommendations.
+        </p>
+        <p>
+            The fully local deployment using Ollama makes it privacy-friendly and suitable for
+            offline use after initial setup. Future improvements could include real-time data
+            updates, multi-language support, and integration with mapping services.
+        </p>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Neural Networks Course Project • Częstochowa City Guide</p>
+        </div>
+    </div>
+</body>
+
+</html>

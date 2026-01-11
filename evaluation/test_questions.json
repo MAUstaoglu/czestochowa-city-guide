@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "question": "What restaurants are available in Częstochowa?",
+        "expected_keywords": [
+            "restaurant",
+            "food",
+            "eat",
+            "cuisine",
+            "polish"
+        ],
+        "category_hint": "restaurant"
+    },
+    {
+        "id": 2,
+        "question": "Where can I find a good hotel to stay?",
+        "expected_keywords": [
+            "hotel",
+            "stay",
+            "accommodation",
+            "room",
+            "bed"
+        ],
+        "category_hint": "hotel"
+    },
+    {
+        "id": 3,
+        "question": "Tell me about religious sites in Częstochowa",
+        "expected_keywords": [
+            "church",
+            "monastery",
+            "religious",
+            "worship",
+            "Jasna Góra"
+        ],
+        "category_hint": "religious_site"
+    },
+    {
+        "id": 4,
+        "question": "What museums can I visit?",
+        "expected_keywords": [
+            "museum",
+            "exhibit",
+            "collection",
+            "history",
+            "art"
+        ],
+        "category_hint": "museum"
+    },
+    {
+        "id": 5,
+        "question": "Recommend a cafe with good coffee",
+        "expected_keywords": [
+            "cafe",
+            "coffee",
+            "espresso",
+            "pastry",
+            "tea"
+        ],
+        "category_hint": "cafe"
+    },
+    {
+        "id": 6,
+        "question": "What are the top-rated places to eat?",
+        "expected_keywords": [
+            "rating",
+            "best",
+            "recommend",
+            "review",
+            "stars"
+        ],
+        "category_hint": "restaurant"
+    },
+    {
+        "id": 7,
+        "question": "Are there any parks for walking?",
+        "expected_keywords": [
+            "park",
+            "green",
+            "walk",
+            "nature",
+            "outdoor"
+        ],
+        "category_hint": "park"
+    },
+    {
+        "id": 8,
+        "question": "What historic sites should I see?",
+        "expected_keywords": [
+            "historic",
+            "history",
+            "old",
+            "monument",
+            "heritage"
+        ],
+        "category_hint": "historic_site"
+    },
+    {
+        "id": 9,
+        "question": "What attractions are there for tourists?",
+        "expected_keywords": [
+            "attraction",
+            "tourist",
+            "visit",
+            "see",
+            "sightseeing"
+        ],
+        "category_hint": "attraction"
+    },
+    {
+        "id": 10,
+        "question": "Where can I eat pierogi?",
+        "expected_keywords": [
+            "pierogi",
+            "polish",
+            "traditional",
+            "food",
+            "restaurant"
+        ],
+        "category_hint": "restaurant"
+    }
+]

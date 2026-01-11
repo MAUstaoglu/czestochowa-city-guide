@@ -1,0 +1,135 @@
+[
+    {
+        "id": 999001,
+        "name": "Jasna Góra Monastery",
+        "name_en": "Jasna Góra Monastery",
+        "category": "religious_site",
+        "lat": 50.8128,
+        "lon": 19.0947,
+        "address": {
+            "street": "ul. Kordeckiego",
+            "housenumber": "2",
+            "city": "Częstochowa",
+            "postcode": "42-225"
+        },
+        "contact": {
+            "phone": "+48 34 377 77 77",
+            "website": "https://jasnagora.pl",
+            "email": ""
+        },
+        "opening_hours": "Mo-Su 05:00-21:30",
+        "cuisine": "",
+        "description": "Jasna Góra Monastery is the most famous Catholic shrine in Poland and one of the most important pilgrimage sites in the world. It houses the miraculous icon of the Black Madonna (Our Lady of Częstochowa), which is believed to have been painted by Saint Luke the Evangelist. The monastery was founded in 1382 by Pauline monks. Millions of pilgrims visit each year, especially during the Feast of the Assumption on August 15th. The monastery complex includes the Chapel of Our Lady, the Basilica, the Knights' Hall, the Treasury, and the 600th Anniversary Museum.",
+        "wikipedia": "en:Jasna Góra Monastery",
+        "wikidata": "Q209405",
+        "review_data": {
+            "reviews": [
+                {
+                    "rating": 5,
+                    "text": "A truly spiritual experience. The Black Madonna icon is breathtaking and the atmosphere is deeply moving.",
+                    "date": "2024-08-15"
+                },
+                {
+                    "rating": 5,
+                    "text": "The most important pilgrimage site in Poland. The history and architecture are incredible.",
+                    "date": "2024-07-20"
+                },
+                {
+                    "rating": 5,
+                    "text": "Must-visit when in Częstochowa. Arrive early to avoid crowds. The museum collection is amazing.",
+                    "date": "2024-06-10"
+                },
+                {
+                    "rating": 4,
+                    "text": "Beautiful monastery with rich history. Can be very crowded during pilgrimage season.",
+                    "date": "2024-05-05"
+                }
+            ],
+            "average_rating": 4.8,
+            "total_reviews": 4
+        },
+        "document_text": "Jasna Góra Monastery is the most famous Catholic shrine in Poland and one of the most important pilgrimage sites in the world. Also known as the Jasna Góra Sanctuary or Częstochowa Monastery. It is located at ul. Kordeckiego 2 in Częstochowa. The monastery houses the miraculous icon of the Black Madonna (Our Lady of Częstochowa, Czarna Madonna), which is believed to have been painted by Saint Luke the Evangelist. The monastery was founded in 1382 by Pauline monks. Millions of pilgrims visit each year, especially during the Feast of the Assumption on August 15th. The monastery complex includes the Chapel of Our Lady, the Basilica, the Knights' Hall, the Treasury, and the 600th Anniversary Museum. Opening hours: Mo-Su 05:00-21:30. Website: https://jasnagora.pl. Average rating: 4.8/5 based on 4 reviews. Review (5/5): \"A truly spiritual experience. The Black Madonna icon is breathtaking and the atmosphere is deeply moving.\""
+    },
+    {
+        "id": 999002,
+        "name": "Black Madonna of Częstochowa",
+        "name_en": "Black Madonna of Częstochowa",
+        "category": "attraction",
+        "lat": 50.8128,
+        "lon": 19.0947,
+        "address": {
+            "street": "ul. Kordeckiego",
+            "housenumber": "2",
+            "city": "Częstochowa",
+            "postcode": "42-225"
+        },
+        "contact": {
+            "phone": "",
+            "website": "https://jasnagora.pl",
+            "email": ""
+        },
+        "opening_hours": "Mo-Su 06:00-21:00",
+        "cuisine": "",
+        "description": "The Black Madonna of Częstochowa (Polish: Czarna Madonna) is a revered icon of the Virgin Mary housed within the Jasna Góra Monastery. It is one of the most famous religious artworks in the world and Poland's most treasured relic. The icon is displayed in the Chapel of Our Lady and is unveiled several times a day to the sound of silver trumpets.",
+        "wikipedia": "en:Black Madonna of Częstochowa",
+        "wikidata": "Q261234",
+        "review_data": {
+            "reviews": [
+                {
+                    "rating": 5,
+                    "text": "Seeing the Black Madonna was a life-changing experience. The unveiling ceremony is unforgettable.",
+                    "date": "2024-09-01"
+                },
+                {
+                    "rating": 5,
+                    "text": "The most sacred icon in Poland. Worth the pilgrimage.",
+                    "date": "2024-08-20"
+                }
+            ],
+            "average_rating": 5.0,
+            "total_reviews": 2
+        },
+        "document_text": "The Black Madonna of Częstochowa (Polish: Czarna Madonna, Matka Boska Częstochowska) is a revered icon of the Virgin Mary housed within the Jasna Góra Monastery. It is one of the most famous religious artworks in the world and Poland's most treasured relic. The icon is displayed in the Chapel of Our Lady at ul. Kordeckiego 2 in Częstochowa. The Black Madonna is unveiled several times a day to the sound of silver trumpets. Opening hours: Mo-Su 06:00-21:00. Average rating: 5.0/5 based on 2 reviews. Review (5/5): \"Seeing the Black Madonna was a life-changing experience. The unveiling ceremony is unforgettable.\""
+    },
+    {
+        "id": 999003,
+        "name": "Aleja Najświętszej Maryi Panny",
+        "name_en": "Avenue of the Blessed Virgin Mary",
+        "category": "attraction",
+        "lat": 50.8117,
+        "lon": 19.1178,
+        "address": {
+            "street": "Aleja Najświętszej Maryi Panny",
+            "housenumber": "",
+            "city": "Częstochowa",
+            "postcode": "42-200"
+        },
+        "contact": {
+            "phone": "",
+            "website": "",
+            "email": ""
+        },
+        "opening_hours": "24/7",
+        "cuisine": "",
+        "description": "The main promenade of Częstochowa and one of the longest pedestrian streets in Europe. It leads from the city center to Jasna Góra Monastery and is lined with shops, restaurants, cafes, and historic buildings. Perfect for walking, shopping, and people-watching.",
+        "wikipedia": "",
+        "wikidata": "",
+        "review_data": {
+            "reviews": [
+                {
+                    "rating": 5,
+                    "text": "Beautiful promenade perfect for an evening walk. Many nice cafes and restaurants.",
+                    "date": "2024-07-15"
+                },
+                {
+                    "rating": 4,
+                    "text": "Great for walking to Jasna Góra. Lots of shops and places to eat.",
+                    "date": "2024-06-20"
+                }
+            ],
+            "average_rating": 4.5,
+            "total_reviews": 2
+        },
+        "document_text": "Aleja Najświętszej Maryi Panny (Avenue of the Blessed Virgin Mary) is the main promenade of Częstochowa and one of the longest pedestrian streets in Europe. It is perfect for walking with a dog, jogging, or strolling. The avenue leads from the city center to Jasna Góra Monastery and is lined with shops, restaurants, cafes, and historic buildings. It is perfect for walking, shopping, and people-watching. Open 24/7. Average rating: 4.5/5 based on 2 reviews. Review (5/5): \"Beautiful promenade perfect for an evening walk. Many nice cafes and restaurants.\""
+    }
+]
