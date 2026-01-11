@@ -291,17 +291,17 @@ pip install -r requirements.txt</code></pre>
 
         <h3>2.4 Prepare Data and Index</h3>
         <pre><code># Fetch POI data from OpenStreetMap
-python data/fetch_osm_data.py
+python3 data/fetch_osm_data.py
 
 # Generate synthetic reviews
-python data/generate_reviews.py
+python3 data/generate_reviews.py
 
 # Index data into ChromaDB (creates vector embeddings)
-python rag/vector_store.py</code></pre>
+python3 rag/vector_store.py</code></pre>
 
         <h3>2.5 Run the Application</h3>
         <pre><code># Make sure Ollama is running (ollama serve)
-python app.py
+python3 app.py
 
 # Open browser at http://localhost:5001</code></pre>
 
