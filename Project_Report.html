@@ -369,6 +369,16 @@
             similarity search even when exact keywords don't match. For example, a query about
             "romantic dinner" can match restaurants described as "cozy" or "intimate."
         </p>
+        <pre><code># embeddings.py - Creating sentence embeddings
+from sentence_transformers import SentenceTransformer
+
+class EmbeddingModel:
+    def __init__(self, model_name="all-MiniLM-L6-v2"):
+        self.model = SentenceTransformer(model_name)
+    
+    def embed(self, texts: list) -> list:
+        """Convert texts to 384-dimensional vectors."""
+        return self.model.encode(texts, convert_to_numpy=True)</code></pre>
 
         <h3>4.3 Vector Database</h3>
         <p>
@@ -376,6 +386,21 @@
             user asks a question, the query is embedded and compared against all 556 POI vectors
             to find the most semantically similar documents.
         </p>
+        <pre><code># vector_store.py - Semantic search with ChromaDB
+import chromadb
+
+class VectorStore:
+    def __init__(self):
+        self.client = chromadb.PersistentClient(path="./chroma_db")
+        self.collection = self.client.get_or_create_collection("pois")
+    
+    def search(self, query_embedding, top_k=3):
+        """Find top-K most similar documents."""
+        results = self.collection.query(
+            query_embeddings=[query_embedding],
+            n_results=top_k
+        )
+        return results</code></pre>
 
         <h3>4.4 Large Language Model</h3>
         <p>
@@ -383,6 +408,21 @@
             for both <code>gemma:2b</code> (1.7GB, faster) and <code>gemma:7b</code> (5GB, more capable).
             The UI includes a model switcher to change between available models dynamically.
         </p>
+        <pre><code># llm.py - Ollama integration for text generation
+import requests
+
+class LLM:
+    def __init__(self, model="gemma:7b"):
+        self.model = model
+        self.base_url = "http://localhost:11434"
+    
+    def generate(self, prompt: str, context: str = "") -> str:
+        """Generate response using the LLM."""
+        response = requests.post(
+            f"{self.base_url}/api/generate",
+            json={"model": self.model, "prompt": prompt, "stream": False}
+        )
+        return response.json()["response"]</code></pre>
 
         <h3>4.5 RAG Prompt Engineering</h3>
         <p>The LLM receives a carefully crafted prompt that includes:</p>
@@ -392,6 +432,22 @@
             <li>Retrieved POI documents with names, addresses, ratings, and reviews</li>
             <li>The user's original question</li>
         </ul>
+        <pre><code># llm.py - RAG prompt template
+def _build_rag_prompt(self, question: str, context: str) -> str:
+    prompt = f"""You are a friendly tourist guide for Częstochowa, Poland.
+
+INSTRUCTIONS:
+1. Answer using ONLY the information from the Context below.
+2. Provide specific details (names, addresses, ratings).
+3. If you cannot find relevant information, politely say so.
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:"""
+    return prompt</code></pre>
 
         <!-- 5. Features -->
         <h2>5. Features</h2>
